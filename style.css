@@ -1,0 +1,207 @@
+/* font start */
+@font-face {
+  font-family: 'Manrope';
+  src: 
+    url('./assets/fonts/Manrope-ExtraBold.woff2') format('woff2'),
+    url('./assets/fonts/Manrope-ExtraBold.woff') format('woff'),
+    url('./assets/fonts/Manrope-ExtraBold.otf') format('opentype'),
+    url('./assets/fonts/Manrope-ExtraBold.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 800;
+}
+/* font end */
+
+
+/* global start */
+:root {
+  --light: hsl(193, 38%, 86%);
+  --green-1: hsl(150, 100%, 66%);
+  --green-2: hsla(150, 100%, 66%, 0.4);
+  --blue-1: hsl(217, 19%, 38%);
+  --blue-2: hsl(217, 19%, 24%);
+  --blue-3: hsl(218, 23%, 16%);
+}
+/* global end */
+
+
+/* reset start */
+*::before,
+*,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+body {
+  background: var(--blue-3);
+  color: var(--light);
+  font-family: Manrope, sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+}
+/* reset end */
+
+
+/* container start */
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 35rem;
+  width: 90%;
+}
+/* container end */
+
+
+/* utilitaries start */
+.circle {
+  border-radius: 50%;
+  left: 50%;
+  position: absolute;
+  top: calc(100% - 2rem);
+  transform: translateX(-50%);
+  transition: box-shadow 0.25s ease-out;
+  height: 4rem;
+  width: 4rem;
+}
+.mt-1 {
+  margin-top: 1.5rem;
+}
+.mt-2 {
+  margin-top: 2.25rem;
+}
+.mb-1 {
+  margin-bottom: 1.5rem;
+}
+.mb-2 {
+  margin-bottom: 2.25rem;
+}
+.my-1 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.my-2 {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+}
+.d--none {
+  display: none;  
+}
+.d--block {
+  display: block;
+}
+/* utilitaries end */
+
+
+/* card start */
+.card {
+  background: var(--blue-2);
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  position: relative;
+  text-align: center;
+}
+.heading {
+  color: var(--green-1);
+  font-size: 0.75rem;
+  letter-spacing: 0.25rem;
+  text-transform: uppercase;
+}
+.quote {
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+}
+.quote::before {
+  content: open-quote;
+}
+.quote::after {
+  content: close-quote;
+}
+.pattern {
+  display: inline-block;
+  content: url('./assets/images/pattern-divider-mobile.svg');
+  max-width: 100%;
+  height: auto;
+}
+.btn {
+  background: var(--green-1);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.btn:hover {
+  box-shadow: 0 0 24px 12px var(--green-2);
+}
+.dice {
+  content: url('assets/images/icon-dice.svg');
+}
+/* card end */
+
+
+/* card skeleton start */
+.skeleton-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skeleton-text {
+  border-radius: 0.325rem;
+  height: 1.125rem;
+}
+.skeleton-text + .skeleton-text {
+  margin-top: 0.5rem;
+}
+
+.skeleton-line {
+  height: 0.125rem;
+}
+
+.skeleton-width {
+  width: 100%;
+}
+.skeleton-width--1 {
+  width: 25%;
+}
+.skeleton-width--2 {
+  width: 50%;
+}
+.skeleton-width--3 {
+  width: 75%;
+}
+
+.skeleton {
+  animation: shimmer 0.4s linear infinite;
+  background: 
+    linear-gradient(90deg, var(--blue-1) 40%, var(--light) 50%, var(--blue-1) 60%);
+  background-size: 200%;
+  background-position: 100%;
+}
+@keyframes shimmer {
+  to {
+    background-position: 0;
+  }
+}
+/* card skeleton end */
+
+
+/* attribution start */
+.attribution {
+  font-size: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+.attribution a {
+  color: var(--green-1);
+}
+/* attribution end */
+
+
+/* desktop start */
+@media (min-width: 62rem) {
+  .pattern {
+    content: url(assets/images/pattern-divider-desktop.svg);
+  }
+}
+/* desktop end */

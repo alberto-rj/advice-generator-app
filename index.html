@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Frontend Mentor | Advice generator app</title>
+  <meta name="title" content="Frontend Mentor | Advice generator app">
+  <meta 
+    name="description" 
+    content="This is Alberto Raúl José's solution to the Advice generator app challenge on Frontend Mentor. Frontend Mentor challenges help you improve your coding skills by building realistic projects."
+  />
+  <meta name="author" content="Alberto Raúl José">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <!-- style -->
+  <link rel="stylesheet" href="./style.css">
+  
+  <!-- script -->
+  <script src="./app.js" defer></script>
+</head>
+<body>
+
+  <!-- advice template start -->
+  <template id="advice-template">
+    <div class="card">
+      <h1 class="heading">Advice #117</h1>
+      <blockquote class="quote my-1">It is easy to sit up and take notice, what's difficult is getting up and taking action.</blockquote>
+      <span aria-hidden="true" class="pattern my-1"></span>
+      <button onclick="generateAdvice()" aria-label="Generate a new advice" class="btn circle">
+        <span aria-hidden="true" class="dice"></span>
+      </button>
+    </div>
+  </template>
+  <!-- advice template  end -->
+
+  <!-- skeleton template start -->
+  <template id="skeleton-template">
+    <div class="card skeleton-width">
+      <!-- heading -->
+      <div class="skeleton skeleton-text skeleton-width--1 skeleton-center"></div>
+      <!-- quote -->
+      <div class="my-2">
+        <div class="skeleton skeleton-text skeleton-width"></div>
+        <div class="skeleton skeleton-text skeleton-width"></div>
+        <div class="skeleton skeleton-text skeleton-width skeleton-width--2 skeleton-center"></div>
+      </div>
+      <!-- pattern-->
+      <div class="skeleton skeleton-line skeleton-width my-2"></div>
+      <!-- button -->
+      <div class="skeleton circle"></div>
+    </div>
+  </template>
+  <!-- skeleton template end -->
+
+  <main class="container"></main>
+  
+  <footer class="attribution">
+    <p>
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/alberto-rj" target="_blank">Alberto Raúl José</a>.
+    </p>
+  </footer>
+</body>
+</html>
