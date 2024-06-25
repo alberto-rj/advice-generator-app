@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - [Preview site](https://alberto-rj.github.io/advice-generator-app/)
-- [Preview solution on Frontend Mentor](https://your-live-site-url.com)
+- [Preview solution on Frontend Mentor](https://www.frontendmentor.io/solutions/advice-generator-app-with-skeleton-screen-R0xlL__Bdj)
 
 ## My process
 
