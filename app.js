@@ -16,11 +16,15 @@ const displayAdvice = (slip) => {
   container.appendChild(adviceNode);
 };
 
-const generateAdvice = () => {
+const fetchAdvice = async () => {
   displaySkeleton();
-  fetch('https://api.adviceslip.com/advice')
-    .then(response => response.json())
-    .then(data => displayAdvice(data.slip));
+  try {
+    const response = await fetch('https://api.adviceslip.com/advice');
+    const data = await response.json();
+    displayAdvice(data.slip);
+  } catch (error) {
+    console.log("Error fetching advice:", error);
+  }
 };
 
-generateAdvice();
+fetchAdviceAdvice();
