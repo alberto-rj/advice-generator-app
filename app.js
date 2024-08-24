@@ -27,4 +27,4 @@ const fetchAdvice = async () => {
   }
 };
 
-fetchAdviceAdvice();
+fetchAdvice();
