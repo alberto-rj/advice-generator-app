@@ -1,151 +1,78 @@
-# Frontend Mentor - Advice generator app solution
+<div align="center">
 
-This is a solution to the [Advice generator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/advice-generator-app-QdUG-13db). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+  <h1 align="center">Advice Generator App</h1>
 
-## Table of contents
+  <p align="center">
+    A single-page app that fetches random advice from a public API, with a skeleton loading screen for perceived performance - built as a <a href="https://www.frontendmentor.io/challenges/advice-generator-app-QdUG-13db"><strong>Frontend Mentor</strong></a> challenge.
+    <br /><br />
+    <a href="https://alberto-rj.github.io/advice-generator-app/"><strong>View Live</strong></a>
+    &nbsp;&nbsp;·&nbsp;&nbsp;
+    <a href="https://www.frontendmentor.io/solutions/advice-generator-app-with-skeleton-screen-R0xlL__Bdj">View on Frontend Mentor</a>
+  </p>
 
-- [Overview](#overview)
-  - [The challenge](#the-challenge)
-  - [Demo](#demo)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
+  <br />
 
-## Overview
+  <img src="https://img.shields.io/badge/Status-Completed-00CE80?style=for-the-badge" alt="Completed">
+  &nbsp;
+  <a href="https://www.frontendmentor.io/challenges?difficulties=1">
+    <img src="https://img.shields.io/badge/Difficulty-Junior-AAC745?style=for-the-badge&logo=frontendmentor" alt="Junior">
+  </a>
 
-### The challenge
+</div>
 
-Users should be able to:
+<br />
 
-- View the optimal layout for the app depending on their device's screen size
-- See hover states for all interactive elements on the page
-- Generate a new piece of advice by clicking the dice icon
+![Desktop demo](./demo/demo-desktop.gif)
 
-### Demo
+<br />
 
-<details open>
-  <summary>Desktop</summary>
-  <img src="./demo/demo-desktop.gif" alt="A gif demo similar to the desktop version of the app">
-</details>
+## About the Project
 
-### Links
+This app hits the [Advice Slip API](https://api.adviceslip.com/) on demand and displays a new piece of advice each time the user clicks the dice button. The main technical focus was handling the async data fetch gracefully - rather than showing a blank card while waiting, I implemented a **skeleton loading screen** with a shimmer animation, which makes the app feel faster and more polished even on slow connections.
 
-- [Preview site](https://alberto-rj.github.io/advice-generator-app/)
-- [Preview solution on Frontend Mentor](https://www.frontendmentor.io/solutions/advice-generator-app-with-skeleton-screen-R0xlL__Bdj)
+**Stack:** HTML5 · CSS3 · JavaScript (Fetch API) · Git
 
-## My process
+<br />
 
-### Built with
+## Key Technical Decisions
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- Mobile-first workflow
-- Vanilla JavaScript (DOM, Fetch API)
+- **Skeleton screen over a spinner:** A spinner communicates "waiting." A skeleton screen communicates the *shape* of what's coming, which anchors the user's attention and reduces perceived load time. For a card-based UI like this one, the skeleton approach was a better fit and something I wanted to learn properly.
 
-### What I learned
+- **`<template>` tag for the skeleton markup:** Rather than building the skeleton element with `innerHTML` strings in JavaScript, I used the HTML `<template>` tag with `cloneNode(true)` to inject it into the DOM. This keeps the skeleton markup in HTML where it belongs, out of JS, and makes it easier to update later without touching the script.
 
-- **Values `open-quote` and `close-quote` of the CSS property `content`**
-  - `open-quote` - Sets the content to be an opening quote.
-  - `close-quote` - Sets the content to be a closing quote.
+- **CSS `open-quote` / `close-quote`:** The design calls for typographic quotation marks around the advice text. Rather than hardcoding `"` characters in the JS string (which breaks if the API response contains quotes), I used CSS `content: open-quote` and `close-quote` on `::before` / `::after` pseudo-elements. The quotes become a presentational concern handled entirely in CSS.
 
-  - **HTML**
+<br />
 
-    ```html
-    <p>Hello World</p>
-    ```
+## Challenges & What I Learned
 
-  - **CSS**
-  
-    ```css
-    p::before {
-      content: open-quote;
-    }
+- **Implementing the skeleton screen from scratch:** I hadn't used this pattern before. The core idea — show placeholder elements with the same dimensions as the real content, animate them with a shimmer gradient, then swap them out on load - was straightforward once I understood it. The tricky part was matching the skeleton's proportions to the actual content closely enough that the transition doesn't cause layout shift.
 
-    p::after {
-      content: close-quote;
-    }
-    ```
+- **Managing async state without a framework:** Without React's state model, I had to be explicit about every UI transition: show skeleton → fetch → hide skeleton → show content → handle error. It was a good exercise in thinking through all possible states of a UI component, not just the happy path. I added an error state that I initially forgot entirely.
 
-  - **Result - after page load**
+- **What I'd do differently:** I'd abstract the fetch logic into a separate function that returns a Promise resolving to the advice data, rather than mixing the fetch call with DOM updates in the same function. Separating the data layer from the UI layer would make both easier to read and test - a lesson I carried into later projects.
 
-    *"Hello World"*
+<br />
 
-- **HTML DOM Element `cloneNode()` method:**
-  - The `cloneNode()` method creates a copy of a node, and returns the clone.
-  - The `cloneNode()` method clones all attributes and their values.
-  - Set the deep parameter to `true` if you also want to clone descendants (children).
-  
-  - **HTML**
+## Running Locally
 
-    ```html
-    <div id="hello">
-      <p>Hello</p>
-    </div>
-    <div id="world">
-      <p>World</p>
-    </div>
-    ```
+```bash
+git clone https://github.com/alberto-rj/advice-generator-app.git
+cd advice-generator-app
+```
 
-  - **JavaScript**
-  
-    ```js
-    const hello = document.getElementById('hello');
-    const world = document.getElementById('world');
-    console.log(hello.cloneNode(false)); // <div id="hello"></div>
-    console.log(world.cloneNode(true)); // <div id="world"><p>World</p></div>
-    ```
+Open `index.html` in your browser. No build step or dependencies required. The app calls the Advice Slip API directly from the browser - no API key needed.
 
-- **`<template>` HTML tag** - Used as a container to hold some HTML content hidden from the user when the page loads.
-
-  - **HTML**
-
-    ```html
-    <button onclick="showContent()">Show hidden content</button>
-    <template id="myTemplate">
-      <p>This paragraph is hidden from the user by default</p>
-    <template>
-    ```
-
-  - **JavaScript**
-  
-    ```js
-    function showContent() {
-      var template = document.getElementById("myTemplate");
-      var p = template.content.cloneNode(true);
-      document.body.appendChild(p);
-    }
-    ```
-
-  - **Result - after calling the `showContent()` method**
-
-    ```html
-    <button onclick="showContent()">Show hidden content</button>
-    <template id="myTemplate">
-      <p>This paragraph is hidden from the user by default</p>
-    <template>
-    <p>This paragraph is hidden from the user by default</p>
-    ```
-
-### Useful resources
-
-- [Advice Slip JSON API](https://api.adviceslip.com/) - The Advice Slip JSON API is provided for free. It currently gives out over 10 million pieces of advice every year. It was used in this solution as a recommendation from Frontend Mentor.
-
-- [Skeleton Loader Example – How to Build a Skeleton Screen with CSS for Better UX](https://www.freecodecamp.org/news/how-to-build-skeleton-screens-using-css-for-better-user-experience/) - Article written by [Israel Mitolu](https://www.freecodecamp.org/news/author/israelmitolu/). He helped me understand what it is, why, when and how to implement a Skeleton Loader in a project. I really liked this pattern and will use it going forward.
-
-- [How to Create a Shimmer Effect Using HTML and CSS?](https://www.codeguage.com/blog/shimmer-effect-html-css) - This is an amazing article from [Codeguage](https://www.codeguage.com) which helped me implement the simmer effect. I would recommend it to anyone who needs to implement this in their project.
-
-- [W3Schools: CSS `content` Property](https://www.w3schools.com/cssref/pr_gen_content.php) - This is a complete reference to the `content` property on W3Schools. I especially used it to get more details about the `open-quote` and `close-quote` values.
-
-- [W3Schools: HTML DOM Element `cloneNode()` Method](https://www.w3schools.com/jsref/met_node_clonenode.asp) - I used this reference to the `cloneNode()` method on W3Schools to get more details about it.
-
-- [W3Schools: HTML `<template>` tag](https://www.w3schools.com/tags/tag_template.asp) - This is a complete reference to the `<template>` tag on W3Schools. I especially used it to get more details on how to use it together with JavaScript.
+<br />
 
 ## Author
 
-- GitHub - [alberto-rj](https://github.com/alberto-rj)
+- GitHub - [@alberto-rj](https://github.com/alberto-rj)
 - Frontend Mentor - [@alberto-rj](https://www.frontendmentor.io/profile/alberto-rj)
-- Twitter - [@albertorauljose](https://www.twitter.com/albertorauljose)
+- Twitter - [@albertorauljose](https://twitter.com/albertorauljose)
+
+<br />
+
+---
+
+Challenge by [Frontend Mentor](https://www.frontendmentor.io).
